@@ -45,11 +45,6 @@
     color:white;
     cursor:pointer;
     font-size:18px;
-    transition:.3s;
-}
-
-.primary:hover{
-    transform:translateY(-3px);
 }
 
 .secondary{
@@ -59,4 +54,14 @@
     color:white;
     border-radius:12px;
     cursor:pointer;
+}
+
+.primary,
+.secondary{
+    transition: all .3s ease;
+}
+
+.primary:hover,
+.secondary:hover{
+    transform: translateY(-4px) scale(1.03);
 }

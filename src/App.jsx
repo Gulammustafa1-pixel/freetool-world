@@ -1,16 +1,15 @@
+import { useState } from "react";
 import "./App.css";
-
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Footer from "./components/Footer";
+import Home from "./pages/Home";
 
 function App() {
+  const [logoData, setLogoData] = useState(null);
+
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <Footer />
-    </>
+    <Home
+      logoData={logoData}
+      setLogoData={setLogoData}
+    />
   );
 }
 
