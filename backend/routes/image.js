@@ -4,25 +4,14 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    const { company, prompt, style, color } = req.body;
+    const { prompt, style } = req.body;
 
     const fullPrompt = `
-Professional minimal vector logo
-
-Company: ${company}
-
 ${prompt}
 
 Style: ${style}
 
-Primary Color: ${color}
-
-Flat logo
-Vector
-Minimal
-White background
-Centered
-No watermark
+High quality, ultra detailed, professional, 8k, masterpiece
 `;
 
     const imageUrl =
@@ -41,7 +30,7 @@ No watermark
     console.error(err);
 
     res.status(500).json({
-      error: "Failed to generate logo",
+      error: "Failed to generate image",
     });
   }
 });

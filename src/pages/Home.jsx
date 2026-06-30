@@ -1,35 +1,45 @@
-import Navbar from "../components/Navbar";
+import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
-import PromptBox from "../components/PromptBox";
-import LogoPreview from "../components/LogoPreview";
-import Features from "../components/Features";
-import Footer from "../components/Footer";
-import Background from "../components/Background";
+import "../App.css";
 
-function Home({ logoData, setLogoData }) {
-
+function Home() {
   return (
     <>
-      <Background />
-
-      <Navbar />
-
       <Hero />
 
-      <PromptBox
-        setLogoData={setLogoData}
-      />
+      <section className="tools-section">
 
-      <LogoPreview
-        logoData={logoData}
-      />
+        <h2>Choose Your AI Tool</h2>
 
-      <Features />
+        <div className="tools-grid">
 
-      <Footer />
+          <Link
+            to="/logo-generator"
+            className="tool-card"
+          >
+            <h3>🎨 AI Logo Generator</h3>
+
+            <p>
+              Create professional AI logos instantly.
+            </p>
+          </Link>
+
+          <Link
+            to="/image-generator"
+            className="tool-card"
+          >
+            <h3>🖼 AI Image Generator</h3>
+
+            <p>
+              Generate stunning AI images from text.
+            </p>
+          </Link>
+
+        </div>
+
+      </section>
     </>
   );
-
 }
 
 export default Home;

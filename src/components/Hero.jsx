@@ -1,5 +1,6 @@
 import "../styles/Hero.css";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -7,11 +8,11 @@ function Hero() {
 
       <motion.span
         className="badge"
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        🚀 AI Powered Logo Generator
+        🚀 100% Free AI Tools Platform
       </motion.span>
 
       <motion.h1
@@ -19,33 +20,37 @@ function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Create Stunning Logos
+        Create Anything
         <br />
-        with Artificial Intelligence
+        With Artificial Intelligence
       </motion.h1>
 
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
+        transition={{ delay: 0.3 }}
       >
-        Turn your ideas into beautiful professional logos in seconds.
-        No design skills required.
+        Generate AI Logos, AI Images, Blogs, Resumes and many more
+        powerful AI tools — all in one place, completely free.
       </motion.p>
 
       <motion.div
         className="hero-buttons"
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: 0.5 }}
       >
-        <button className="primary">
-          Generate Logo
-        </button>
+        <Link to="/logo-generator">
+          <button className="primary">
+            Start Creating
+          </button>
+        </Link>
 
-        <button className="secondary">
-          Explore Tools
-        </button>
+        <Link to="/image-generator">
+          <button className="secondary">
+            AI Image Generator
+          </button>
+        </Link>
       </motion.div>
 
     </section>
