@@ -1,48 +1,57 @@
 import { useState } from "react";
 import "../styles/PromptBox.css";
-import { generateLogo } from "../api/huggingface";
-function PromptBox({ setLogoData }) {
+import { generateLogo } from "../api/backend";
 
+function PromptBox({ setLogoData }) {
   const [company, setCompany] = useState("");
   const [prompt, setPrompt] = useState("");
   const [style, setStyle] = useState("Minimal");
   const [color, setColor] = useState("Blue");
   const [loading, setLoading] = useState(false);
 
-const handleGenerate = async () => {
+  const handleGenerate = async () => {
+    if (!company || !prompt) {
+      alert("Please enter Company Name and Logo Description.");
+      return;
+    }
 
-  if (!company || !prompt) {
-    alert("Please enter Company Name and Logo Description.");
-    return;
-  }
+    setLoading(true);
 
-  setLoading(true);
+    try {
+      const result = await generateLogo({
+        company,
+        prompt,
+        style,
+        color,
+      });
 
-  const fullPrompt = `
-Company: ${company}
-Logo Description: ${prompt}
-Style: ${style}
-Color: ${color}
-`;
+      console.log("FULL RESULT:", result);
+      console.log("IMAGES:", result?.images);
+      console.log("URL:", result?.images?.[0]?.url);
 
-const result = await generateLogo(fullPrompt);
+      if (result && result.images && result.images.length > 0) {
+        setLogoData({
+          company,
+          prompt,
+          style,
+          color,
+          image: result.images[0].url,
+        });
 
-if (result?.images?.[0]?.url) {
-  setLogoData({
-    company,
-    prompt,
-    style,
-    color,
-    image: result.images[0].url,
-  });
-}
+        console.log("Logo data updated successfully.");
+      } else {
+        alert("No image received from API.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    }
 
-setLoading(false);
+    setLoading(false);
+  };
 
-};
   return (
     <div className="prompt-box">
-
       <input
         type="text"
         placeholder="Company Name"
@@ -58,7 +67,6 @@ Example: Modern blue lion logo for a tech company."
       />
 
       <div className="controls">
-
         <select
           value={style}
           onChange={(e) => setStyle(e.target.value)}
@@ -81,22 +89,20 @@ Example: Modern blue lion logo for a tech company."
           <option>Green</option>
         </select>
 
-<button
-  onClick={handleGenerate}
-  disabled={loading}
->
-  {loading ? (
-    <>
-      <span className="spinner"></span>
-      Generating...
-    </>
-  ) : (
-    "Generate AI Logo"
-  )}
-</button>
-
+        <button
+          onClick={handleGenerate}
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <span className="spinner"></span>
+              Generating...
+            </>
+          ) : (
+            "Generate AI Logo"
+          )}
+        </button>
       </div>
-
     </div>
   );
 }

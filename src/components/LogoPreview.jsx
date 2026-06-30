@@ -5,22 +5,25 @@ function LogoPreview({ logoData }) {
   const handleDownload = async () => {
     try {
       const response = await fetch(logoData.image);
+
       const blob = await response.blob();
 
-      const url = window.URL.createObjectURL(blob);
+      const blobUrl = window.URL.createObjectURL(blob);
 
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${logoData.company || "logo"}.png`;
+      const link = document.createElement("a");
 
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+      link.href = blobUrl;
+      link.download = `${logoData.company || "logo"}.png`;
 
-      window.URL.revokeObjectURL(url);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      window.URL.revokeObjectURL(blobUrl);
+
     } catch (error) {
-      console.error("Download failed:", error);
-      alert("Unable to download the image.");
+      console.error(error);
+      alert("Download failed.");
     }
   };
 
