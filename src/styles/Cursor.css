@@ -1,0 +1,33 @@
+.cursor{
+
+    width:22px;
+    height:22px;
+
+    border-radius:50%;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    background:rgba(0,212,255,.25);
+
+    border:2px solid #00d4ff;
+
+    backdrop-filter:blur(8px);
+
+    box-shadow:
+        0 0 15px #00d4ff,
+        0 0 40px rgba(0,212,255,.5);
+
+    transition:
+        transform .08s linear,
+        width .2s,
+        height .2s;
+
+    z-index:999999;
+}

@@ -66,43 +66,214 @@ body{
   background:#0284c7;
 }
 .tools-section{
-    width:90%;
-    max-width:1200px;
-    margin:100px auto;
+
+    width:92%;
+    max-width:1350px;
+
+    margin:140px auto;
+
     text-align:center;
+
+    position:relative;
 }
 
 .tools-section h2{
-    color:white;
-    font-size:42px;
-    margin-bottom:60px;
+
+    font-size:56px;
+
+    font-weight:800;
+
+    margin-bottom:18px;
+
+    background:linear-gradient(
+        90deg,
+        #ffffff,
+        #00d4ff,
+        #6d5df6
+    );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
 .tools-grid{
+
+    margin-top:70px;
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:30px;
+
+    grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+
+    gap:35px;
 }
 
+/* ---------- CARD ---------- */
+
 .tool-card{
-    background:#111827;
-    border:1px solid #334155;
-    border-radius:20px;
-    padding:40px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:45px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
     text-decoration:none;
-    transition:.3s;
+
+    transition:.45s;
+
+    min-height:250px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:flex-start;
+}
+
+/* Glow */
+
+.tool-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:320px;
+    height:320px;
+
+    background:
+    radial-gradient(circle,
+    rgba(0,212,255,.35),
+    transparent 70%);
+
+    top:-170px;
+    right:-170px;
+
+    transition:.6s;
+}
+
+/* Border Animation */
+
+.tool-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:28px;
+
+    padding:1px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.15),
+        rgba(109,93,246,.6),
+        rgba(0,212,255,.5)
+    );
+
+    -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+    pointer-events:none;
 }
 
 .tool-card:hover{
-    transform:translateY(-8px);
-    border-color:#38bdf8;
+
+    transform:
+    translateY(-12px)
+    scale(1.02);
+
+    box-shadow:
+    0 30px 80px rgba(0,0,0,.35);
+}
+
+.tool-card:hover::before{
+
+    transform:
+    scale(1.5)
+    rotate(35deg);
 }
 
 .tool-card h3{
+
+    font-size:34px;
+
     color:white;
-    margin-bottom:20px;
+
+    margin-bottom:18px;
+
+    z-index:2;
 }
 
 .tool-card p{
-    color:#cbd5e1;
+
+    color:#b8c1ec;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    z-index:2;
+}
+/* ========================= */
+/* Spotlight Card */
+/* ========================= */
+
+.spotlight-card{
+
+    position:relative;
+
+    border-radius:28px;
+
+    overflow:hidden;
+}
+
+.spotlight-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:var(--x);
+
+    top:var(--y);
+
+    width:260px;
+
+    height:260px;
+
+    background:
+    radial-gradient(circle,
+    rgba(0,212,255,.28),
+    transparent 70%);
+
+    transform:
+    translate(-50%,-50%);
+
+    pointer-events:none;
+
+    transition:.08s;
+
+    opacity:0;
+}
+
+.spotlight-card:hover::before{
+
+    opacity:1;
 }

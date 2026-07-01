@@ -5,47 +5,95 @@ import Home from "./pages/Home";
 import LogoGenerator from "./pages/LogoGenerator";
 import ImageGenerator from "./pages/ImageGenerator";
 
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Background from "./components/Background";
 
+import Loader from "./components/Loader";
+import ScrollProgress from "./components/ScrollProgress";
+import Cursor from "./components/Cursor";
+import MouseGlow from "./components/MouseGlow";
+import ScrollToTop from "./components/ScrollToTop";
 import "./App.css";
 
 function App() {
   const [logoData, setLogoData] = useState(null);
 
   return (
-    <BrowserRouter>
-      <Background />
+    <Loader>
 
-      <Navbar />
+      <BrowserRouter>
+       <ScrollToTop />
 
-      <Routes>
+        <ScrollProgress />
 
-        <Route
-          path="/"
-          element={<Home />}
-        />
+        <Cursor />
 
-        <Route
-          path="/logo-generator"
-          element={
-            <LogoGenerator
-              logoData={logoData}
-              setLogoData={setLogoData}
-            />
-          }
-        />
+       
 
-        <Route
-          path="/image-generator"
-          element={<ImageGenerator />}
-        />
+        <MouseGlow />
 
-      </Routes>
+        <Navbar />
 
-      <Footer />
-    </BrowserRouter>
+        <Routes>
+
+          <Route
+            path="/"
+            element={<Home />}
+          />
+
+          <Route
+            path="/logo-generator"
+            element={
+              <LogoGenerator
+                logoData={logoData}
+                setLogoData={setLogoData}
+              />
+            }
+          />
+
+          <Route
+            path="/image-generator"
+            element={<ImageGenerator />}
+          />
+
+          <Route
+            path="/about"
+            element={<About />}
+          />
+
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
+
+          <Route
+            path="/blog"
+            element={<Blog />}
+          />
+
+          <Route
+            path="/privacy-policy"
+            element={<Privacy />}
+          />
+
+          <Route
+            path="/terms"
+            element={<Terms />}
+          />
+
+        </Routes>
+
+        <Footer />
+
+      </BrowserRouter>
+
+    </Loader>
   );
 }
 

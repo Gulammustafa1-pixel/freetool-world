@@ -3,33 +3,32 @@ import "../styles/Navbar.css";
 
 function Navbar() {
   return (
-    <nav className="navbar">
+    <header className="navbar">
 
       <div className="logo">
-        FreeTool.world
+        <span className="logo-icon">✦</span>
+        <span>FreeTool.world</span>
       </div>
 
-      <ul className="nav-links">
+      <nav className="nav-links">
 
-        <li>
-          <Link to="/">Home</Link>
-        </li>
+        <Link to="/">Home</Link>
 
-        <li>
-          <Link to="/logo-generator">
-            AI Logo Generator
-          </Link>
-        </li>
+        <Link to="/logo-generator">
+          AI Logo
+        </Link>
 
-        <li>
-          <Link to="/image-generator">
-            AI Image Generator
-          </Link>
-        </li>
+        <Link to="/image-generator">
+          AI Image
+        </Link>
 
-      </ul>
+      </nav>
 
-    </nav>
+      <button className="nav-btn">
+        Get Started
+      </button>
+
+    </header>
   );
 }
 
