@@ -15,6 +15,7 @@ function ImagePromptBox({ setImageData }) {
     }
 
     setLoading(true);
+    setImageData(null);
 
     const result = await generateImage({
       prompt,

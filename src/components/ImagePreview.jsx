@@ -5,13 +5,18 @@ function ImagePreview({ imageData }) {
   const handleDownload = async () => {
     try {
       const response = await fetch(imageData.image);
+
+      if (!response.ok) {
+        throw new Error("Image download failed");
+      }
+
       const blob = await response.blob();
 
       const url = window.URL.createObjectURL(blob);
 
       const a = document.createElement("a");
       a.href = url;
-      a.download = "AI-Image.jpg";
+      a.download = "AI-Image.png";
 
       document.body.appendChild(a);
       a.click();
@@ -35,10 +40,26 @@ function ImagePreview({ imageData }) {
         {imageData ? (
           <>
             <div className="logo-image">
+
               <img
-                src={imageData.image}
-                alt="Generated"
+  key={imageData.image}
+  src={imageData.image}
+  alt="Generated"
+  loading="eager"
+  referrerPolicy="no-referrer"
+  onError={(e) => {
+    console.log("Retry Image");
+
+    setTimeout(() => {
+      e.target.src =
+        imageData.image +
+        (imageData.image.includes("?") ? "&" : "?") +
+        "retry=" +
+        Date.now();
+    }, 2000);
+  }}
               />
+
             </div>
 
             <p>{imageData.prompt}</p>
