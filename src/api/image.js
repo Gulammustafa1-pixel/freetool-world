@@ -1,13 +1,26 @@
-import axios from "axios";
-
 export const generateImage = async (data) => {
   try {
-    const response = await axios.post(
-      "http://localhost:5000/api/image",
-      data
-    );
+    const fullPrompt = `
+${data.prompt}
 
-    return response.data;
+Style: ${data.style}
+
+Size: ${data.size}
+
+High quality, ultra detailed, professional, 8k, masterpiece
+`;
+
+    const imageUrl =
+      "https://image.pollinations.ai/prompt/" +
+      encodeURIComponent(fullPrompt);
+
+    return {
+      images: [
+        {
+          url: imageUrl,
+        },
+      ],
+    };
   } catch (error) {
     console.error(error);
     return null;
