@@ -1,37 +1,28 @@
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export const generateImage = async (data) => {
-  const prompt = encodeURIComponent(
-    `${data.prompt}, ${data.style}, high quality`
-  );
+  try {
+    const fullPrompt = `
+${data.prompt}
 
-  const urls = [
-    `https://image.pollinations.ai/prompt/${prompt}?model=flux&width=1024&height=1024&seed=${Date.now()}&nologo=true`,
-    `https://image.pollinations.ai/prompt/${prompt}?width=1024&height=1024&seed=${Date.now()}&nologo=true`,
-  ];
+Style: ${data.style}
 
-  for (const url of urls) {
-    try {
-      const response = await fetch(url, {
-        method: "HEAD",
-        cache: "no-store",
-      });
+Size: ${data.size}
 
-      if (response.ok) {
-        return {
-          images: [
-            {
-              url,
-            },
-          ],
-        };
-      }
-    } catch (err) {
-      console.log("Retrying...", err);
-    }
+High quality, ultra detailed, professional, 8k, masterpiece
+`;
 
-    await sleep(1500);
+    const imageUrl =
+      "https://image.pollinations.ai/prompt/" +
+      encodeURIComponent(fullPrompt);
+
+    return {
+      images: [
+        {
+          url: imageUrl,
+        },
+      ],
+    };
+  } catch (error) {
+    console.error(error);
+    return null;
   }
-
-  return null;
 };

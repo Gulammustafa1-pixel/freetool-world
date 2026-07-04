@@ -2,32 +2,10 @@ import "../styles/LogoPreview.css";
 
 function ImagePreview({ imageData }) {
 
-  const handleDownload = async () => {
-    try {
-      const response = await fetch(imageData.image);
+  const handleDownload = () => {
+    if (!imageData?.image) return;
 
-      if (!response.ok) {
-        throw new Error("Image download failed");
-      }
-
-      const blob = await response.blob();
-
-      const url = window.URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "AI-Image.png";
-
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-
-      window.URL.revokeObjectURL(url);
-
-    } catch (err) {
-      console.error(err);
-      alert("Download failed");
-    }
+    window.open(imageData.image, "_blank");
   };
 
   return (
@@ -42,22 +20,19 @@ function ImagePreview({ imageData }) {
             <div className="logo-image">
 
               <img
-  key={imageData.image}
-  src={imageData.image}
-  alt="Generated"
-  loading="eager"
-  referrerPolicy="no-referrer"
-  onError={(e) => {
-    console.log("Retry Image");
-
-    setTimeout(() => {
-      e.target.src =
-        imageData.image +
-        (imageData.image.includes("?") ? "&" : "?") +
-        "retry=" +
-        Date.now();
-    }, 2000);
-  }}
+                key={imageData.image}
+                src={imageData.image}
+                alt="Generated"
+                loading="eager"
+                onError={(e) => {
+                  setTimeout(() => {
+                    e.target.src =
+                      imageData.image +
+                      (imageData.image.includes("?") ? "&" : "?") +
+                      "retry=" +
+                      Date.now();
+                  }, 2000);
+                }}
               />
 
             </div>
@@ -76,7 +51,7 @@ function ImagePreview({ imageData }) {
               className="download-btn"
               onClick={handleDownload}
             >
-              Download Image
+              Open Full Image
             </button>
 
           </>
