@@ -4,6 +4,7 @@ import { useState } from "react";
 import Home from "./pages/Home";
 import LogoGenerator from "./pages/LogoGenerator";
 import ImageGenerator from "./pages/ImageGenerator";
+import MobilePricePredictor from "./pages/MobilePricePredictor";
 
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -19,6 +20,7 @@ import ScrollProgress from "./components/ScrollProgress";
 import Cursor from "./components/Cursor";
 import MouseGlow from "./components/MouseGlow";
 import ScrollToTop from "./components/ScrollToTop";
+
 import "./App.css";
 
 function App() {
@@ -26,22 +28,18 @@ function App() {
 
   return (
     <Loader>
-
       <BrowserRouter>
-       <ScrollToTop />
+        <ScrollToTop />
 
         <ScrollProgress />
 
         <Cursor />
-
-       
 
         <MouseGlow />
 
         <Navbar />
 
         <Routes>
-
           <Route
             path="/"
             element={<Home />}
@@ -60,6 +58,11 @@ function App() {
           <Route
             path="/image-generator"
             element={<ImageGenerator />}
+          />
+
+          <Route
+            path="/mobile-price-predictor"
+            element={<MobilePricePredictor />}
           />
 
           <Route
@@ -86,13 +89,10 @@ function App() {
             path="/terms"
             element={<Terms />}
           />
-
         </Routes>
 
         <Footer />
-
       </BrowserRouter>
-
     </Loader>
   );
 }
