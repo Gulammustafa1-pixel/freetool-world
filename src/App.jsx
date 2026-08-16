@@ -24,20 +24,7 @@ import ScrollToTop from "./components/ScrollToTop";
 
 import "./App.css";
 
-function SEO({
-  title,
-  description,
-  canonical,
-  schemaType = "WebPage",
-}) {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": schemaType,
-    name: title,
-    description: description,
-    url: `https://freetool.world${canonical}`,
-  };
-
+function SEO({ title, description, canonical }) {
   return (
     <Helmet>
       <title>{title}</title>
@@ -82,11 +69,6 @@ function SEO({
         property="og:site_name"
         content="FreeToolWorld"
       />
-
-      {/* Structured Data / Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify(schema)}
-      </script>
     </Helmet>
   );
 }
@@ -119,7 +101,6 @@ function App() {
                   title="Free AI Tools Online - FreeToolWorld"
                   description="Explore free AI tools online for logo creation, image generation, productivity and more with FreeToolWorld."
                   canonical="/"
-                  schemaType="WebSite"
                 />
 
                 <Home />
@@ -136,7 +117,6 @@ function App() {
                   title="AI Logo Generator - Create Logos Online Free"
                   description="Create professional logos with AI for free. Generate unique logo ideas and designs online with FreeToolWorld."
                   canonical="/logo-generator"
-                  schemaType="WebApplication"
                 />
 
                 <LogoGenerator
@@ -156,7 +136,6 @@ function App() {
                   title="AI Image Generator - Create Images From Text Free"
                   description="Generate AI images from text prompts for free. Create unique artwork, illustrations and visuals with FreeToolWorld."
                   canonical="/image-generator"
-                  schemaType="WebApplication"
                 />
 
                 <ImageGenerator />
@@ -173,7 +152,6 @@ function App() {
                   title="Mobile Price Predictor - Estimate Phone Price With AI"
                   description="Predict smartphone prices using AI based on RAM, storage, battery, camera, screen size and processor specifications."
                   canonical="/mobile-price-predictor"
-                  schemaType="WebApplication"
                 />
 
                 <MobilePricePredictor />
